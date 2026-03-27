@@ -82,6 +82,7 @@ namespace AT_Work1
             driver.Quit();
         }
 
+        [Test]
         public void EHUContactFormTest()
         {
             IWebDriver driver = new ChromeDriver();
