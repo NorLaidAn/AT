@@ -93,11 +93,11 @@ namespace AT_Work1
             IWebElement contactsHref = driver.FindElement(By.XPath("//li[contains(@class,'menu-item-17512')]//a[contains(@href,'contacts')]"));
             contactsHref.Click();
 
-            Console.WriteLine(driver.FindElement(By.XPath("//em[text()='consult@ehu.lt']")).Displayed);
+            Assert.That(driver.FindElement(By.XPath("//em[text()='consult@ehu.lt']")).Displayed);
 
-            Console.WriteLine(driver.FindElement(By.XPath("//td[contains(., '+370')]")).Displayed);
+            Assert.That(driver.FindElement(By.XPath("//td[contains(., '+370')]")).Displayed);
 
-            Console.WriteLine(driver.FindElement(By.XPath("//a[contains(@href, 'facebook') and contains(text(), 'University')]")).Displayed);
+            Assert.That(driver.FindElement(By.XPath("//a[contains(@href, 'facebook') and contains(text(), 'University')]")).Displayed);
 
             driver.Quit();
         }
