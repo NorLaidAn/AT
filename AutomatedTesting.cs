@@ -32,6 +32,7 @@ namespace AT_Work1
             driver.Quit();
         }
 
+        [Test]
         public void EHUSearchTest()
         {
             IWebDriver driver = new ChromeDriver();
@@ -55,6 +56,28 @@ namespace AT_Work1
             Assert.That(currentUrl, Is.EqualTo("https://en.ehuniversity.lt/?s=study+programs"));
 
             driver.FindElement(By.XPath("//div[@class='content search-results']"));
+
+            driver.Quit();
+        }
+
+        [Test]
+        public void EHULanguageTest()
+        {
+            IWebDriver driver = new ChromeDriver();
+            Actions actions = new Actions(driver);
+            driver.Manage().Window.Maximize();
+            driver.Navigate().GoToUrl("https://en.ehu.lt");
+
+            IWebElement languageChanger = driver.FindElement(By.XPath("//li[a[text()='en']]"));
+
+            actions.MoveToElement(languageChanger).Perform();
+
+            IWebElement changeButton = driver.FindElement(By.XPath("//a[text()='lt']"));
+            changeButton.Click();
+
+            string currentUrl = driver.Url;
+            Assert.That(currentUrl, Does.Contain("lt."));
+            driver.FindElement(By.XPath("//a[text()='Apie mus']"));
 
             driver.Quit();
         }
