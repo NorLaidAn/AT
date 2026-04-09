@@ -18,7 +18,6 @@ namespace AT_Work3
         public IWebElement searchBox => driver.FindElement(By.XPath("//input[@class='form-control']"));
         public IWebElement submitButton => driver.FindElement(By.XPath("//button[@class='btn btn-info']"));
         public IWebElement languageChanger => driver.FindElement(By.XPath("//li[a[text()='en']]"));
-        public IWebElement changeButton => driver.FindElement(By.XPath("//a[text()='lt']"));
         public IWebElement contactsHref => driver.FindElement(By.XPath("//li[contains(@class,'menu-item-17512')]//a[contains(@href,'contacts')]"));
 
         public EHUHomePage(IWebDriver driver)
@@ -33,9 +32,16 @@ namespace AT_Work3
         }
         public void Search(string str)
         {
+            actions.MoveToElement(search).Perform();
             searchBox.Clear();
             searchBox.SendKeys(str);
             submitButton.Click();
+        }
+        public void ChangeLanguage(string str)
+        {
+            actions.MoveToElement(languageChanger).Perform();
+            IWebElement changeButton = driver.FindElement(By.XPath($"//a[text()='{str}']"));
+            changeButton.Click();
         }
         public string GetCurrentUrl() => driver.Url;
         public string GetPageTitle() => driver.Title;
