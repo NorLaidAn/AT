@@ -10,19 +10,18 @@ namespace AT_Work3
     [Category("UI testing")]
     public class EHUTests
     {
-        private IWebDriver driver;
+        private IWebDriver driver = DriverSingleton.Get();
         private EHUHomePage page;
 
         [SetUp]
         public void Setup()
         {
-            driver = new ChromeDriver();
             page = new EHUHomePage(driver);
             driver.Manage().Window.Maximize();
             driver.Navigate().GoToUrl("https://en.ehu.lt");
         }
 
-        [TearDown]
+        [OneTimeTearDown]
         public void Cleanup()
         {
             driver.Quit();
