@@ -20,10 +20,10 @@ namespace AT_Work4
             page = new EHUHomePage(driver);
         }
 
-        [AfterScenario]
-        public void Cleanup()
+        [AfterTestRun]
+        public static void Cleanup()
         {
-            driver.Quit();
+            DriverSingleton.Get().Quit();
         }
 
         [Given("user is on EHU homepage")]
