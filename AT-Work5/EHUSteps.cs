@@ -2,7 +2,7 @@
 using OpenQA.Selenium;
 using Reqnroll;
 
-namespace AT_Work4
+namespace AT_Work5
 {
     [Binding]
     public class EHUSteps
@@ -20,10 +20,10 @@ namespace AT_Work4
             page = new EHUHomePage(driver);
         }
 
-        [AfterScenario]
-        public void Cleanup()
+        [AfterTestRun]
+        public static void Cleanup()
         {
-            driver.Quit();
+            DriverSingleton.Get().Quit();
         }
 
         [Given("user is on EHU homepage")]
@@ -81,3 +81,4 @@ namespace AT_Work4
         }
     }
 }
+
