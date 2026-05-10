@@ -1,6 +1,8 @@
 ﻿using NUnit.Framework;
 using OpenQA.Selenium;
 using Reqnroll;
+using Serilog;
+using Shouldly;
 
 namespace AT_Work5
 {
@@ -13,6 +15,7 @@ namespace AT_Work5
         [BeforeScenario]
         public void Setup()
         {
+            Log.Information("Начало сценария");
             driver = DriverSingleton.Get();
             driver.Manage().Window.Maximize();
             driver.Navigate().GoToUrl("https://en.ehu.lt");
@@ -20,15 +23,29 @@ namespace AT_Work5
             page = new EHUHomePage(driver);
         }
 
+        [AfterScenario]
+        public void AfterScenario()
+        {
+            Log.Information("Конец сценария");
+        }
+
+        [BeforeTestRun]
+        public static void SetupLogging()
+        {
+            Logger.Configure();
+        }
+
         [AfterTestRun]
         public static void Cleanup()
         {
             DriverSingleton.Get().Quit();
+            Log.CloseAndFlush();
         }
 
         [Given("user is on EHU homepage")]
         public void GivenUserIsOnHomepage()
         {
+            Log.Information("Главная страница открыта");
             // alredy opend
         }
 
@@ -41,7 +58,7 @@ namespace AT_Work5
         [Then("About page should be opened")]
         public void ThenAboutPageOpened()
         {
-            Assert.That(page.GetCurrentUrl(), Does.Contain("about"));
+            page.GetCurrentUrl().ShouldContain("about");
         }
 
         [When("user searches for {string}")]
@@ -53,7 +70,7 @@ namespace AT_Work5
         [Then("search results page should be opened")]
         public void ThenSearchResults()
         {
-            Assert.That(page.GetCurrentUrl(), Does.Contain("?s="));
+            page.GetCurrentUrl().ShouldContain("?s=");
         }
 
         [When("user changes language to {string}")]
@@ -65,7 +82,7 @@ namespace AT_Work5
         [Then("Lithuanian version should be displayed")]
         public void ThenLanguageChanged()
         {
-            Assert.That(page.GetCurrentUrl(), Does.Contain("lt."));
+            page.GetCurrentUrl().ShouldContain("lt.");
         }
 
         [When("user opens contacts page")]
@@ -77,7 +94,7 @@ namespace AT_Work5
         [Then("contact information should be visible")]
         public void ThenContactsVisible()
         {
-            Assert.That(driver.FindElement(By.XPath("//em[text()='consult@ehu.lt']")).Displayed);
+            page.consult.Displayed.ShouldBeTrue();
         }
     }
 }
