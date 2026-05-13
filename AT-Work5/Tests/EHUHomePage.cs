@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Serilog;
 
-namespace AT_Work5
+namespace AT_Work5.Tests
 {
     internal class EHUHomePage
     {
@@ -32,7 +32,7 @@ namespace AT_Work5
         public EHUHomePage(IWebDriver driver)
         {
             this.driver = driver;
-            this.actions = new Actions(driver);
+            actions = new Actions(driver);
         }
 
         public void HoverAndCLick(IWebElement element)

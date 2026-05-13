@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AT_Work5
+namespace AT_Work5.Tests
 {
     internal class DriverSingleton
     {

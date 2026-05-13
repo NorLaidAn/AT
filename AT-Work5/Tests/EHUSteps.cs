@@ -1,10 +1,14 @@
-﻿using NUnit.Framework;
+﻿using Allure.Net.Commons;
+using Allure.NUnit;
+using AT_Work5.Logger;
+using AT_Work5.Reporting;
+using NUnit.Framework;
 using OpenQA.Selenium;
 using Reqnroll;
 using Serilog;
 using Shouldly;
 
-namespace AT_Work5
+namespace AT_Work5.Tests
 {
     [Binding]
     public class EHUSteps
@@ -15,6 +19,8 @@ namespace AT_Work5
         [BeforeScenario]
         public void Setup()
         {
+            AllureApi.AddTestParameter("Browser", "Chrome");
+
             Log.Information("Начало сценария");
             driver = DriverSingleton.Get();
             driver.Manage().Window.Maximize();
@@ -32,7 +38,8 @@ namespace AT_Work5
         [BeforeTestRun]
         public static void SetupLogging()
         {
-            Logger.Configure();
+            MyLogger.Configure();
+            MyEnvironment.CreateReportEnviroment();
         }
 
         [AfterTestRun]

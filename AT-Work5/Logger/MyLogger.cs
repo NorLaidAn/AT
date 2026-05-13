@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AT_Work5
+namespace AT_Work5.Logger
 {
-    internal static class Logger
+    internal static class MyLogger
     {
         public static void Configure()
         {

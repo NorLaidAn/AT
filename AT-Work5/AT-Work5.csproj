@@ -8,12 +8,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="C:\Users\fd\.nuget\packages\allure.net.commons\2.15.0\contentFiles\any\netstandard2.0\allureConfig.Template.json" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Allure.Net.Commons" Version="2.15.0" />
     <PackageReference Include="Allure.NUnit" Version="2.15.0" />
+    <PackageReference Include="Allure.Reqnroll" Version="2.15.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="18.5.1" />
     <PackageReference Include="NUnit" Version="4.6.0" />
     <PackageReference Include="NUnit3TestAdapter" Version="6.2.0" />
